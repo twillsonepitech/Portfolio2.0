@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0f0f0f] text-gray-800 dark:text-gray-200 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#0f0f0f] text-gray-800 dark:text-gray-200">
       {/* Animated Background */}
       <AnimatedBackground />
 
