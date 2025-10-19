@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { animate, random, stagger } from 'animejs';
+import { random } from 'animejs';
 
 const AnimatedBackground = () => {
   const canvasRef = useRef(null);
@@ -20,8 +20,8 @@ const AnimatedBackground = () => {
     window.addEventListener('resize', resizeCanvas);
 
     const isDark = document.documentElement.classList.contains('dark');
-    const color = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.1)';
-    const dotColor = isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.15)';
+    const color = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
+    const dotColor = isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.12)';
 
     // Branch Tree System
     class Branch {
@@ -39,24 +39,40 @@ const AnimatedBackground = () => {
 
       grow(ctx) {
         if (this.growth < this.maxGrowth) {
-          this.growth += 0.02;
+          // Much slower growth - reduced from 0.02 to 0.005
+          this.growth += 0.005;
         }
 
         const endX = this.x + Math.cos(this.angle) * this.length * this.growth;
         const endY = this.y + Math.sin(this.angle) * this.length * this.growth;
 
+        // Smooth gradient stroke
+        const gradient = ctx.createLinearGradient(this.x, this.y, endX, endY);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(1, isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)');
+
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(endX, endY);
-        ctx.strokeStyle = color;
+        ctx.strokeStyle = gradient;
         ctx.lineWidth = this.thickness;
         ctx.lineCap = 'round';
         ctx.stroke();
 
-        // Draw dot at the end
+        // Draw dot at the end with glow effect
         if (this.growth >= this.maxGrowth) {
+          // Glow
           ctx.beginPath();
-          ctx.arc(endX, endY, this.thickness * 1.5, 0, Math.PI * 2);
+          ctx.arc(endX, endY, this.thickness * 2.5, 0, Math.PI * 2);
+          const glowGradient = ctx.createRadialGradient(endX, endY, 0, endX, endY, this.thickness * 2.5);
+          glowGradient.addColorStop(0, dotColor);
+          glowGradient.addColorStop(1, 'transparent');
+          ctx.fillStyle = glowGradient;
+          ctx.fill();
+
+          // Core dot
+          ctx.beginPath();
+          ctx.arc(endX, endY, this.thickness * 1.2, 0, Math.PI * 2);
           ctx.fillStyle = dotColor;
           ctx.fill();
         }
@@ -65,19 +81,19 @@ const AnimatedBackground = () => {
       }
 
       split() {
-        if (this.generation >= 4) return [];
+        if (this.generation >= 5) return [];
 
         const endX = this.x + Math.cos(this.angle) * this.length;
         const endY = this.y + Math.sin(this.angle) * this.length;
 
-        const branches = Math.floor(random(2, 4));
+        const branches = Math.floor(random(2, 3));
         const newBranches = [];
 
         for (let i = 0; i < branches; i++) {
-          const angleOffset = (Math.random() - 0.5) * Math.PI / 3;
+          const angleOffset = (Math.random() - 0.5) * Math.PI / 4;
           const newAngle = this.angle + angleOffset;
-          const newLength = this.length * random(0.6, 0.85);
-          const newThickness = this.thickness * 0.7;
+          const newLength = this.length * random(0.65, 0.8);
+          const newThickness = this.thickness * 0.75;
 
           newBranches.push(
             new Branch(
@@ -95,19 +111,33 @@ const AnimatedBackground = () => {
       }
     }
 
-    // Create multiple tree systems
+    // Create tree systems from sides
     const trees = [];
-    const treeCount = 6;
+    const treesPerSide = 4;
 
-    for (let i = 0; i < treeCount; i++) {
-      const startX = (canvas.width / (treeCount + 1)) * (i + 1);
-      const startY = canvas.height * (Math.random() * 0.4 + 0.3);
-      const initialAngle = (Math.random() - 0.5) * Math.PI / 4;
+    // Left side trees
+    for (let i = 0; i < treesPerSide; i++) {
+      const startX = random(20, 100); // Start from left edge
+      const startY = (canvas.height / (treesPerSide + 1)) * (i + 1);
+      const initialAngle = random(-Math.PI / 6, Math.PI / 6); // Grow towards right
       
       trees.push({
-        root: new Branch(startX, startY, initialAngle, random(80, 120), 3, 0),
+        root: new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0),
         branches: [],
-        growthQueue: []
+        side: 'left'
+      });
+    }
+
+    // Right side trees
+    for (let i = 0; i < treesPerSide; i++) {
+      const startX = canvas.width - random(20, 100); // Start from right edge
+      const startY = (canvas.height / (treesPerSide + 1)) * (i + 1);
+      const initialAngle = Math.PI + random(-Math.PI / 6, Math.PI / 6); // Grow towards left
+      
+      trees.push({
+        root: new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0),
+        branches: [],
+        side: 'right'
       });
     }
 
@@ -118,16 +148,16 @@ const AnimatedBackground = () => {
 
     // Dot Wave System
     const dots = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 80; i++) {
       dots.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         baseY: Math.random() * canvas.height,
-        radius: random(1, 3),
-        speed: random(0.001, 0.003),
-        amplitude: random(20, 50),
+        radius: random(1, 2.5),
+        speed: random(0.0005, 0.0015), // Slower wave movement
+        amplitude: random(15, 35),
         phase: Math.random() * Math.PI * 2,
-        opacity: random(0.2, 0.5)
+        opacity: random(0.15, 0.35)
       });
     }
 
@@ -137,16 +167,21 @@ const AnimatedBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw dot waves
-      time += 0.01;
+      // Draw dot waves - very slow
+      time += 0.005; // Reduced from 0.01
       dots.forEach(dot => {
         dot.y = dot.baseY + Math.sin(time * dot.speed * 100 + dot.phase) * dot.amplitude;
         
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-        ctx.fillStyle = isDark 
+        // Subtle glow on dots
+        const gradient = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 2);
+        gradient.addColorStop(0, isDark 
           ? `rgba(255, 255, 255, ${dot.opacity})` 
-          : `rgba(0, 0, 0, ${dot.opacity})`;
+          : `rgba(0, 0, 0, ${dot.opacity})`);
+        gradient.addColorStop(1, 'transparent');
+        
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius * 2, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
         ctx.fill();
       });
 
@@ -157,7 +192,8 @@ const AnimatedBackground = () => {
         tree.branches.forEach(branch => {
           const result = branch.grow(ctx);
           
-          if (result.grown && branch.generation < 4 && Math.random() > 0.7) {
+          // Less frequent splitting for smoother effect
+          if (result.grown && branch.generation < 5 && Math.random() > 0.85) {
             const splits = branch.split();
             newBranches.push(...splits);
           }
@@ -168,20 +204,28 @@ const AnimatedBackground = () => {
         }
 
         // Limit total branches per tree
-        if (tree.branches.length > 50) {
-          tree.branches = tree.branches.slice(-50);
+        if (tree.branches.length > 40) {
+          tree.branches = tree.branches.slice(-40);
         }
       });
 
-      // Periodically reset some trees
-      if (Math.random() > 0.99) {
+      // Very slow regeneration
+      if (Math.random() > 0.995) {
         const treeIndex = Math.floor(Math.random() * trees.length);
         const tree = trees[treeIndex];
-        const startX = (canvas.width / (treeCount + 1)) * (treeIndex + 1);
-        const startY = canvas.height * (Math.random() * 0.4 + 0.3);
-        const initialAngle = (Math.random() - 0.5) * Math.PI / 4;
         
-        tree.root = new Branch(startX, startY, initialAngle, random(80, 120), 3, 0);
+        if (tree.side === 'left') {
+          const startX = random(20, 100);
+          const startY = random(canvas.height * 0.2, canvas.height * 0.8);
+          const initialAngle = random(-Math.PI / 6, Math.PI / 6);
+          tree.root = new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0);
+        } else {
+          const startX = canvas.width - random(20, 100);
+          const startY = random(canvas.height * 0.2, canvas.height * 0.8);
+          const initialAngle = Math.PI + random(-Math.PI / 6, Math.PI / 6);
+          tree.root = new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0);
+        }
+        
         tree.branches = [tree.root];
       }
 
@@ -201,7 +245,7 @@ const AnimatedBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0, opacity: 0.4 }}
+      style={{ zIndex: 0, opacity: 0.5 }}
     />
   );
 };
