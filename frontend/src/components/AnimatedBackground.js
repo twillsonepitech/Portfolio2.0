@@ -1,106 +1,148 @@
 import React, { useEffect, useRef } from 'react';
+import anime from 'animejs';
 
 const AnimatedBackground = () => {
-  const canvasRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!containerRef.current) return;
 
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-    let time = 0;
+    const isDark = document.documentElement.classList.contains('dark');
+    const particleCount = 50;
+    const particles = [];
 
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Particle system
-    class Line {
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.length = Math.random() * 200 + 100;
-        this.angle = Math.random() * Math.PI * 2;
-        this.speed = Math.random() * 0.5 + 0.2;
-        this.opacity = Math.random() * 0.5 + 0.1;
-      }
-
-      update() {
-        this.x += Math.cos(this.angle) * this.speed;
-        this.y += Math.sin(this.angle) * this.speed;
-
-        // Wrap around screen
-        if (this.x < -this.length) this.x = canvas.width + this.length;
-        if (this.x > canvas.width + this.length) this.x = -this.length;
-        if (this.y < -this.length) this.y = canvas.height + this.length;
-        if (this.y > canvas.height + this.length) this.y = -this.length;
-      }
-
-      draw(isDark) {
-        const endX = this.x + Math.cos(this.angle) * this.length;
-        const endY = this.y + Math.sin(this.angle) * this.length;
-
-        const gradient = ctx.createLinearGradient(this.x, this.y, endX, endY);
-        const color = isDark ? '255, 255, 255' : '0, 0, 0';
-        gradient.addColorStop(0, `rgba(${color}, 0)`);
-        gradient.addColorStop(0.5, `rgba(${color}, ${this.opacity})`);
-        gradient.addColorStop(1, `rgba(${color}, 0)`);
-
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-      }
+    // Create particles
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.cssText = `
+        position: absolute;
+        width: ${Math.random() * 4 + 1}px;
+        height: ${Math.random() * 4 + 1}px;
+        background: ${isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)'};
+        border-radius: 50%;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+      `;
+      containerRef.current.appendChild(particle);
+      particles.push(particle);
     }
 
-    // Create lines
-    const lines = [];
-    for (let i = 0; i < 15; i++) {
-      lines.push(new Line());
-    }
-
-    // Animation loop
-    const animate = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      
-      // Clear canvas with fade effect
-      ctx.fillStyle = isDark ? 'rgba(15, 15, 15, 0.05)' : 'rgba(255, 255, 255, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Update and draw lines
-      lines.forEach(line => {
-        line.update();
-        line.draw(isDark);
+    // Animate particles floating
+    particles.forEach((particle, index) => {
+      anime({
+        targets: particle,
+        translateX: () => anime.random(-100, 100),
+        translateY: () => anime.random(-100, 100),
+        scale: () => anime.random(0.5, 1.5),
+        opacity: [
+          { value: anime.random(0.1, 0.4), duration: 1000 },
+          { value: anime.random(0.1, 0.4), duration: 1000 }
+        ],
+        duration: () => anime.random(3000, 6000),
+        easing: 'easeInOutSine',
+        loop: true,
+        delay: index * 20,
       });
+    });
 
-      time += 0.01;
-      animationFrameId = requestAnimationFrame(animate);
-    };
+    // Create flowing lines
+    const lineCount = 8;
+    for (let i = 0; i < lineCount; i++) {
+      const line = document.createElement('div');
+      line.className = 'flow-line';
+      const startX = Math.random() * 100;
+      const startY = Math.random() * 100;
+      
+      line.style.cssText = `
+        position: absolute;
+        width: 2px;
+        height: 0px;
+        background: linear-gradient(180deg, 
+          transparent, 
+          ${isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)'}, 
+          transparent
+        );
+        left: ${startX}%;
+        top: ${startY}%;
+        transform-origin: top;
+      `;
+      containerRef.current.appendChild(line);
 
-    animate();
+      anime({
+        targets: line,
+        height: [
+          { value: 0, duration: 0 },
+          { value: anime.random(100, 300), duration: 1500, easing: 'easeOutQuad' },
+          { value: 0, duration: 1500, easing: 'easeInQuad' }
+        ],
+        translateY: () => anime.random(-200, 200),
+        translateX: () => anime.random(-50, 50),
+        rotate: () => anime.random(-45, 45),
+        opacity: [
+          { value: 0, duration: 0 },
+          { value: 0.8, duration: 750 },
+          { value: 0, duration: 750 }
+        ],
+        loop: true,
+        delay: i * 500,
+        duration: 4000,
+      });
+    }
 
+    // Create geometric shapes
+    const shapes = ['circle', 'square', 'triangle'];
+    for (let i = 0; i < 15; i++) {
+      const shape = document.createElement('div');
+      const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+      const size = Math.random() * 30 + 10;
+      
+      shape.className = `shape-${shapeType}`;
+      shape.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        border: 1px solid ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'};
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        ${shapeType === 'circle' ? 'border-radius: 50%;' : ''}
+        ${shapeType === 'triangle' ? 'clip-path: polygon(50% 0%, 0% 100%, 100% 100%);' : ''}
+      `;
+      containerRef.current.appendChild(shape);
+
+      anime({
+        targets: shape,
+        translateX: () => anime.random(-200, 200),
+        translateY: () => anime.random(-200, 200),
+        rotate: () => anime.random(0, 360),
+        scale: [
+          { value: 0.5, duration: 2000 },
+          { value: 1.2, duration: 2000 }
+        ],
+        opacity: [
+          { value: 0.05, duration: 2000 },
+          { value: 0.2, duration: 2000 }
+        ],
+        duration: () => anime.random(4000, 8000),
+        easing: 'easeInOutQuad',
+        loop: true,
+        delay: i * 100,
+      });
+    }
+
+    // Cleanup
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
+      if (containerRef.current) {
+        containerRef.current.innerHTML = '';
+      }
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full pointer-events-none opacity-20 dark:opacity-10"
-      style={{ zIndex: 0 }}
+    <div
+      ref={containerRef}
+      className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
+      style={{ zIndex: 0, opacity: 0.3 }}
     />
   );
 };
