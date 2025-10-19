@@ -2,13 +2,14 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Mic, Camera, Rss, Github, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import AnimatedBackground from './AnimatedBackground';
 
 const Layout = ({ children }) => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
-    { name: 'Blog', path: '/blog' },
+    { name: 'Experiences', path: '/experiences' },
     { name: 'Projects', path: '/projects' },
     { name: 'Talks', path: '/talks' },
     { name: 'Sponsors', path: '/sponsors' }
