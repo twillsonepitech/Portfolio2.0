@@ -86,14 +86,14 @@ const Home = () => {
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-gray-500 dark:text-gray-400">Working with</span>
             {technologies.map((tech, index) => (
-              <ProjectBadge key={index} icon={tech.icon} name={tech.name} url={tech.url} />
+              <TechBadge key={index} name={tech.name} logoUrl={tech.logoUrl} url={tech.url} />
             ))}
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-gray-500 dark:text-gray-400">Clients include</span>
             {clients.map((client, index) => (
-              <ProjectBadge key={index} icon={client.icon} name={client.name} />
+              <TechBadge key={index} name={client.name} logoUrl={client.logoUrl} url={client.url} />
             ))}
           </div>
         </div>
