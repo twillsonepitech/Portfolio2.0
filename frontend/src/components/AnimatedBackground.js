@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { random } from 'animejs';
 
 const AnimatedBackground = () => {
   const canvasRef = useRef(null);
@@ -20,144 +19,25 @@ const AnimatedBackground = () => {
     window.addEventListener('resize', resizeCanvas);
 
     const isDark = document.documentElement.classList.contains('dark');
-    const color = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
-    const dotColor = isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.12)';
 
-    // Branch Tree System
-    class Branch {
-      constructor(x, y, angle, length, thickness, generation = 0) {
-        this.x = x;
-        this.y = y;
-        this.angle = angle;
-        this.length = length;
-        this.thickness = thickness;
-        this.generation = generation;
-        this.growth = 0;
-        this.maxGrowth = 1;
-        this.children = [];
-      }
-
-      grow(ctx) {
-        if (this.growth < this.maxGrowth) {
-          // Much slower growth - reduced from 0.02 to 0.005
-          this.growth += 0.005;
-        }
-
-        const endX = this.x + Math.cos(this.angle) * this.length * this.growth;
-        const endY = this.y + Math.sin(this.angle) * this.length * this.growth;
-
-        // Smooth gradient stroke
-        const gradient = ctx.createLinearGradient(this.x, this.y, endX, endY);
-        gradient.addColorStop(0, color);
-        gradient.addColorStop(1, isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)');
-
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(endX, endY);
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = this.thickness;
-        ctx.lineCap = 'round';
-        ctx.stroke();
-
-        // Draw dot at the end with glow effect
-        if (this.growth >= this.maxGrowth) {
-          // Glow
-          ctx.beginPath();
-          ctx.arc(endX, endY, this.thickness * 2.5, 0, Math.PI * 2);
-          const glowGradient = ctx.createRadialGradient(endX, endY, 0, endX, endY, this.thickness * 2.5);
-          glowGradient.addColorStop(0, dotColor);
-          glowGradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = glowGradient;
-          ctx.fill();
-
-          // Core dot
-          ctx.beginPath();
-          ctx.arc(endX, endY, this.thickness * 1.2, 0, Math.PI * 2);
-          ctx.fillStyle = dotColor;
-          ctx.fill();
-        }
-
-        return { x: endX, y: endY, grown: this.growth >= this.maxGrowth };
-      }
-
-      split() {
-        if (this.generation >= 5) return [];
-
-        const endX = this.x + Math.cos(this.angle) * this.length;
-        const endY = this.y + Math.sin(this.angle) * this.length;
-
-        const branches = Math.floor(random(2, 3));
-        const newBranches = [];
-
-        for (let i = 0; i < branches; i++) {
-          const angleOffset = (Math.random() - 0.5) * Math.PI / 4;
-          const newAngle = this.angle + angleOffset;
-          const newLength = this.length * random(0.65, 0.8);
-          const newThickness = this.thickness * 0.75;
-
-          newBranches.push(
-            new Branch(
-              endX,
-              endY,
-              newAngle,
-              newLength,
-              newThickness,
-              this.generation + 1
-            )
-          );
-        }
-
-        return newBranches;
-      }
-    }
-
-    // Create tree systems from sides
-    const trees = [];
-    const treesPerSide = 4;
-
-    // Left side trees
-    for (let i = 0; i < treesPerSide; i++) {
-      const startX = random(20, 100); // Start from left edge
-      const startY = (canvas.height / (treesPerSide + 1)) * (i + 1);
-      const initialAngle = random(-Math.PI / 6, Math.PI / 6); // Grow towards right
-      
-      trees.push({
-        root: new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0),
-        branches: [],
-        side: 'left'
-      });
-    }
-
-    // Right side trees
-    for (let i = 0; i < treesPerSide; i++) {
-      const startX = canvas.width - random(20, 100); // Start from right edge
-      const startY = (canvas.height / (treesPerSide + 1)) * (i + 1);
-      const initialAngle = Math.PI + random(-Math.PI / 6, Math.PI / 6); // Grow towards left
-      
-      trees.push({
-        root: new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0),
-        branches: [],
-        side: 'right'
-      });
-    }
-
-    // Initialize first generation
-    trees.forEach(tree => {
-      tree.branches.push(tree.root);
-    });
-
-    // Dot Wave System
+    // Dot Wave System - full page coverage
     const dots = [];
-    for (let i = 0; i < 80; i++) {
+    const dotCount = 150; // More dots for full coverage
+    
+    for (let i = 0; i < dotCount; i++) {
       dots.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         baseY: Math.random() * canvas.height,
-        radius: random(1, 2.5),
-        speed: random(0.0005, 0.0015), // Slower wave movement
-        amplitude: random(15, 35),
-        phase: Math.random() * Math.PI * 2,
-        opacity: random(0.15, 0.35)
+        baseX: Math.random() * canvas.width,
+        radius: Math.random() * 2 + 1,
+        speedY: Math.random() * 0.001 + 0.0005, // Vertical wave speed
+        speedX: Math.random() * 0.0005 + 0.0002, // Horizontal drift speed
+        amplitudeY: Math.random() * 30 + 20, // Vertical wave amplitude
+        amplitudeX: Math.random() * 20 + 10, // Horizontal drift amplitude
+        phaseY: Math.random() * Math.PI * 2,
+        phaseX: Math.random() * Math.PI * 2,
+        opacity: Math.random() * 0.3 + 0.2
       });
     }
 
@@ -167,67 +47,48 @@ const AnimatedBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw dot waves - very slow
-      time += 0.005; // Reduced from 0.01
+      // Update dark mode state
+      const currentDark = document.documentElement.classList.contains('dark');
+
+      // Draw dot waves across entire page
+      time += 0.01;
+      
       dots.forEach(dot => {
-        dot.y = dot.baseY + Math.sin(time * dot.speed * 100 + dot.phase) * dot.amplitude;
+        // Wave motion in Y axis
+        dot.y = dot.baseY + Math.sin(time * dot.speedY * 100 + dot.phaseY) * dot.amplitudeY;
         
-        // Subtle glow on dots
-        const gradient = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 2);
-        gradient.addColorStop(0, isDark 
+        // Gentle drift in X axis
+        dot.x = dot.baseX + Math.sin(time * dot.speedX * 100 + dot.phaseX) * dot.amplitudeX;
+        
+        // Keep dots within canvas bounds
+        if (dot.x < 0) dot.baseX = canvas.width;
+        if (dot.x > canvas.width) dot.baseX = 0;
+        if (dot.y < 0) dot.baseY = canvas.height;
+        if (dot.y > canvas.height) dot.baseY = 0;
+        
+        // Draw dot with subtle glow
+        const gradient = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 3);
+        gradient.addColorStop(0, currentDark 
           ? `rgba(255, 255, 255, ${dot.opacity})` 
           : `rgba(0, 0, 0, ${dot.opacity})`);
+        gradient.addColorStop(0.5, currentDark 
+          ? `rgba(255, 255, 255, ${dot.opacity * 0.5})` 
+          : `rgba(0, 0, 0, ${dot.opacity * 0.5})`);
         gradient.addColorStop(1, 'transparent');
         
         ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.radius * 2, 0, Math.PI * 2);
+        ctx.arc(dot.x, dot.y, dot.radius * 3, 0, Math.PI * 2);
         ctx.fillStyle = gradient;
         ctx.fill();
+        
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+        ctx.fillStyle = currentDark 
+          ? `rgba(255, 255, 255, ${dot.opacity * 1.2})` 
+          : `rgba(0, 0, 0, ${dot.opacity * 1.2})`;
+        ctx.fill();
       });
-
-      // Draw and grow branches
-      trees.forEach(tree => {
-        const newBranches = [];
-        
-        tree.branches.forEach(branch => {
-          const result = branch.grow(ctx);
-          
-          // Less frequent splitting for smoother effect
-          if (result.grown && branch.generation < 5 && Math.random() > 0.85) {
-            const splits = branch.split();
-            newBranches.push(...splits);
-          }
-        });
-
-        if (newBranches.length > 0) {
-          tree.branches.push(...newBranches);
-        }
-
-        // Limit total branches per tree
-        if (tree.branches.length > 40) {
-          tree.branches = tree.branches.slice(-40);
-        }
-      });
-
-      // Very slow regeneration
-      if (Math.random() > 0.995) {
-        const treeIndex = Math.floor(Math.random() * trees.length);
-        const tree = trees[treeIndex];
-        
-        if (tree.side === 'left') {
-          const startX = random(20, 100);
-          const startY = random(canvas.height * 0.2, canvas.height * 0.8);
-          const initialAngle = random(-Math.PI / 6, Math.PI / 6);
-          tree.root = new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0);
-        } else {
-          const startX = canvas.width - random(20, 100);
-          const startY = random(canvas.height * 0.2, canvas.height * 0.8);
-          const initialAngle = Math.PI + random(-Math.PI / 6, Math.PI / 6);
-          tree.root = new Branch(startX, startY, initialAngle, random(60, 100), 2.5, 0);
-        }
-        
-        tree.branches = [tree.root];
-      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
