@@ -43,19 +43,19 @@ const Home = () => {
             <span className="font-medium">Paris, France</span>
           </p>
 
-          <p className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-gray-500 dark:text-gray-400">Working with</span>
             {technologies.map((tech, index) => (
               <ProjectBadge key={index} icon={tech.icon} name={tech.name} url={tech.url} />
             ))}
-          </p>
+          </div>
 
-          <p className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-gray-500 dark:text-gray-400">Clients include</span>
             {clients.map((client, index) => (
               <ProjectBadge key={index} icon={client.icon} name={client.name} />
             ))}
-          </p>
+          </div>
         </div>
       </section>
 
