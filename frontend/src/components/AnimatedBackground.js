@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import anime from 'animejs';
+import { animate, random, stagger, createTimeline } from 'animejs';
 
 const AnimatedBackground = () => {
   const containerRef = useRef(null);
