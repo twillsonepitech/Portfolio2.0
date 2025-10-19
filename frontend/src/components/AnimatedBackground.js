@@ -97,20 +97,13 @@ const AnimatedBackground = () => {
       `;
       containerRef.current.appendChild(shape);
 
-      anime({
-        targets: shape,
-        translateX: () => anime.random(-200, 200),
-        translateY: () => anime.random(-200, 200),
-        rotate: () => anime.random(0, 360),
-        scale: [
-          { value: 0.5, duration: 2000 },
-          { value: 1.2, duration: 2000 }
-        ],
-        opacity: [
-          { value: 0.05, duration: 2000 },
-          { value: 0.2, duration: 2000 }
-        ],
-        duration: () => anime.random(4000, 8000),
+      animate(shape, {
+        translateX: [0, random(-200, 200)],
+        translateY: [0, random(-200, 200)],
+        rotate: [0, random(0, 360)],
+        scale: [0.5, 1.2, 0.5],
+        opacity: [0.05, 0.2, 0.05],
+        duration: random(4000, 8000),
         easing: 'easeInOutQuad',
         loop: true,
         delay: i * 100,
