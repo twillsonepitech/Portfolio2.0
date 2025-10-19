@@ -19,29 +19,8 @@ const Layout = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0f0f0f] text-gray-800 dark:text-gray-200 transition-colors duration-200">
-      {/* Decorative background */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-5 dark:opacity-10">
-        <svg
-          className="absolute top-1/4 -left-20 w-96 h-96 text-gray-400"
-          viewBox="0 0 400 400"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M50 200 Q 100 100, 200 150 T 350 200"
-            stroke="currentColor"
-            strokeWidth="1"
-            fill="none"
-          />
-          <circle cx="80" cy="180" r="40" stroke="currentColor" strokeWidth="1" fill="none" />
-          <path
-            d="M150 100 L200 50 L250 100 L200 150 Z"
-            stroke="currentColor"
-            strokeWidth="1"
-            fill="none"
-          />
-        </svg>
-      </div>
+      {/* Animated Background */}
+      <AnimatedBackground />
 
       {/* Header */}
       <header className="relative z-10 py-6 px-6">
