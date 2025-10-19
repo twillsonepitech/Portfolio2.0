@@ -30,16 +30,12 @@ const AnimatedBackground = () => {
 
     // Animate particles floating
     particles.forEach((particle, index) => {
-      anime({
-        targets: particle,
-        translateX: () => anime.random(-100, 100),
-        translateY: () => anime.random(-100, 100),
-        scale: () => anime.random(0.5, 1.5),
-        opacity: [
-          { value: anime.random(0.1, 0.4), duration: 1000 },
-          { value: anime.random(0.1, 0.4), duration: 1000 }
-        ],
-        duration: () => anime.random(3000, 6000),
+      animate(particle, {
+        translateX: [0, random(-100, 100)],
+        translateY: [0, random(-100, 100)],
+        scale: [1, random(0.5, 1.5)],
+        opacity: [random(0.1, 0.4), random(0.1, 0.4)],
+        duration: random(3000, 6000),
         easing: 'easeInOutSine',
         loop: true,
         delay: index * 20,
