@@ -65,21 +65,12 @@ const AnimatedBackground = () => {
       `;
       containerRef.current.appendChild(line);
 
-      anime({
-        targets: line,
-        height: [
-          { value: 0, duration: 0 },
-          { value: anime.random(100, 300), duration: 1500, easing: 'easeOutQuad' },
-          { value: 0, duration: 1500, easing: 'easeInQuad' }
-        ],
-        translateY: () => anime.random(-200, 200),
-        translateX: () => anime.random(-50, 50),
-        rotate: () => anime.random(-45, 45),
-        opacity: [
-          { value: 0, duration: 0 },
-          { value: 0.8, duration: 750 },
-          { value: 0, duration: 750 }
-        ],
+      animate(line, {
+        height: [0, random(100, 300), 0],
+        translateY: [0, random(-200, 200)],
+        translateX: [0, random(-50, 50)],
+        rotate: [0, random(-45, 45)],
+        opacity: [0, 0.8, 0],
         loop: true,
         delay: i * 500,
         duration: 4000,
