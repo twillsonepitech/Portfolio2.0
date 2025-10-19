@@ -1,22 +1,62 @@
 import React from 'react';
-import ProjectBadge from '../components/ProjectBadge';
+import TechBadge from '../components/TechBadge';
 import { Github, Linkedin, Mail, Twitter, MessageCircle } from 'lucide-react';
 
 const Home = () => {
   const technologies = [
-    { name: 'React', icon: '⚛️', url: '#' },
-    { name: 'Next.js', icon: '▲', url: '#' },
-    { name: 'NestJS', icon: '🐈', url: '#' },
-    { name: 'PostgreSQL', icon: '🐘', url: '#' },
-    { name: 'TypeScript', icon: '💙', url: '#' },
-    { name: 'TailwindCSS', icon: '🎨', url: '#' },
+    { 
+      name: 'React', 
+      logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+      url: 'https://github.com/facebook/react'
+    },
+    { 
+      name: 'Next.js', 
+      logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+      url: 'https://github.com/vercel/next.js'
+    },
+    { 
+      name: 'NestJS', 
+      logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg',
+      url: 'https://github.com/nestjs/nest'
+    },
+    { 
+      name: 'PostgreSQL', 
+      logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+      url: 'https://github.com/postgres/postgres'
+    },
+    { 
+      name: 'TypeScript', 
+      logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+      url: 'https://github.com/microsoft/TypeScript'
+    },
+    { 
+      name: 'TailwindCSS', 
+      logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+      url: 'https://github.com/tailwindlabs/tailwindcss'
+    },
   ];
 
   const clients = [
-    { name: 'Partech Partners', icon: '💼' },
-    { name: 'Mobilier Solidaire', icon: '🪑' },
-    { name: '6ixtes', icon: '⚙️' },
-    { name: 'Link-Up', icon: '🎓' },
+    { 
+      name: 'Partech Partners',
+      logoUrl: 'https://media.licdn.com/dms/image/v2/D4E0BAQHK3qO_SmYi_A/company-logo_200_200/company-logo_200_200/0/1719409267788/partech_logo?e=2147483647&v=beta&t=xQF3gXO-RZbN5QH8IVMFqvQoEjZOi5RrDrWa7R6h0u4',
+      url: 'https://partechpartners.com'
+    },
+    { 
+      name: 'Mobilier Solidaire',
+      logoUrl: 'https://www.groupe-ms.com/wp-content/themes/groupe-ms/assets/images/logo.svg',
+      url: 'https://www.groupe-ms.com'
+    },
+    { 
+      name: '6ixtes',
+      logoUrl: 'https://via.placeholder.com/32/4A90E2/FFFFFF?text=6',
+      url: '#'
+    },
+    { 
+      name: 'Link-Up',
+      logoUrl: 'https://via.placeholder.com/32/E94B3C/FFFFFF?text=L',
+      url: '#'
+    },
   ];
 
   const socialLinks = [
