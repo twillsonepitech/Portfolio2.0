@@ -78,9 +78,9 @@ const Home = () => {
           <a href="/talks" className="text-gray-900 dark:text-gray-100 hover:underline">
             talks
           </a>{' '}
-          and write{' '}
-          <a href="/blog" className="text-gray-900 dark:text-gray-100 hover:underline">
-            blog posts
+          and share{' '}
+          <a href="/experiences" className="text-gray-900 dark:text-gray-100 hover:underline">
+            professional experiences
           </a>{' '}
           about web development, modern JavaScript, and building scalable applications. You can find my{' '}
           <a href="/projects" className="text-gray-900 dark:text-gray-100 hover:underline">
