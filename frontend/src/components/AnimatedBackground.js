@@ -9,6 +9,7 @@ const AnimatedBackground = () => {
 
     const ctx = canvas.getContext('2d');
     let animationFrameId;
+    let time = 0;
 
     // Set canvas size
     const resizeCanvas = () => {
@@ -18,78 +19,125 @@ const AnimatedBackground = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const isDark = document.documentElement.classList.contains('dark');
+    // Gradient Orbs System
+    class Orb {
+      constructor() {
+        this.reset();
+      }
 
-    // Dot Wave System - full page coverage
-    const dots = [];
-    const dotCount = 150; // More dots for full coverage
-    
-    for (let i = 0; i < dotCount; i++) {
-      dots.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        baseY: Math.random() * canvas.height,
-        baseX: Math.random() * canvas.width,
-        radius: Math.random() * 2 + 1,
-        speedY: Math.random() * 0.001 + 0.0005, // Vertical wave speed
-        speedX: Math.random() * 0.0005 + 0.0002, // Horizontal drift speed
-        amplitudeY: Math.random() * 30 + 20, // Vertical wave amplitude
-        amplitudeX: Math.random() * 20 + 10, // Horizontal drift amplitude
-        phaseY: Math.random() * Math.PI * 2,
-        phaseX: Math.random() * Math.PI * 2,
-        opacity: Math.random() * 0.3 + 0.2
-      });
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 300 + 200;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.hue = Math.random() * 60 + 200; // Blue-ish hues
+        this.opacity = Math.random() * 0.15 + 0.05;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Bounce off edges
+        if (this.x < -this.radius || this.x > canvas.width + this.radius) {
+          this.speedX *= -1;
+        }
+        if (this.y < -this.radius || this.y > canvas.height + this.radius) {
+          this.speedY *= -1;
+        }
+      }
+
+      draw(ctx, isDark) {
+        const gradient = ctx.createRadialGradient(
+          this.x, this.y, 0,
+          this.x, this.y, this.radius
+        );
+
+        if (isDark) {
+          gradient.addColorStop(0, `hsla(${this.hue}, 70%, 60%, ${this.opacity})`);
+          gradient.addColorStop(0.5, `hsla(${this.hue}, 50%, 40%, ${this.opacity * 0.5})`);
+          gradient.addColorStop(1, 'transparent');
+        } else {
+          gradient.addColorStop(0, `hsla(${this.hue}, 60%, 85%, ${this.opacity})`);
+          gradient.addColorStop(0.5, `hsla(${this.hue}, 40%, 75%, ${this.opacity * 0.5})`);
+          gradient.addColorStop(1, 'transparent');
+        }
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
-    let time = 0;
+    // Subtle Grid Lines
+    class GridLine {
+      constructor(isVertical) {
+        this.isVertical = isVertical;
+        this.position = Math.random() * (isVertical ? canvas.width : canvas.height);
+        this.offset = 0;
+        this.speed = Math.random() * 0.1 + 0.05;
+      }
+
+      update() {
+        this.offset += this.speed;
+        if (this.offset > 20) this.offset = 0;
+      }
+
+      draw(ctx, isDark) {
+        ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([10, 10]);
+        ctx.lineDashOffset = -this.offset;
+
+        ctx.beginPath();
+        if (this.isVertical) {
+          ctx.moveTo(this.position, 0);
+          ctx.lineTo(this.position, canvas.height);
+        } else {
+          ctx.moveTo(0, this.position);
+          ctx.lineTo(canvas.width, this.position);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    // Create orbs
+    const orbs = [];
+    for (let i = 0; i < 5; i++) {
+      orbs.push(new Orb());
+    }
+
+    // Create grid lines
+    const gridLines = [];
+    for (let i = 0; i < 8; i++) {
+      gridLines.push(new GridLine(true)); // vertical
+      gridLines.push(new GridLine(false)); // horizontal
+    }
 
     // Animation loop
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Update dark mode state
-      const currentDark = document.documentElement.classList.contains('dark');
-
-      // Draw dot waves across entire page
-      time += 0.01;
+      const isDark = document.documentElement.classList.contains('dark');
       
-      dots.forEach(dot => {
-        // Wave motion in Y axis
-        dot.y = dot.baseY + Math.sin(time * dot.speedY * 100 + dot.phaseY) * dot.amplitudeY;
-        
-        // Gentle drift in X axis
-        dot.x = dot.baseX + Math.sin(time * dot.speedX * 100 + dot.phaseX) * dot.amplitudeX;
-        
-        // Keep dots within canvas bounds
-        if (dot.x < 0) dot.baseX = canvas.width;
-        if (dot.x > canvas.width) dot.baseX = 0;
-        if (dot.y < 0) dot.baseY = canvas.height;
-        if (dot.y > canvas.height) dot.baseY = 0;
-        
-        // Draw dot with subtle glow
-        const gradient = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 3);
-        gradient.addColorStop(0, currentDark 
-          ? `rgba(255, 255, 255, ${dot.opacity})` 
-          : `rgba(0, 0, 0, ${dot.opacity})`);
-        gradient.addColorStop(0.5, currentDark 
-          ? `rgba(255, 255, 255, ${dot.opacity * 0.5})` 
-          : `rgba(0, 0, 0, ${dot.opacity * 0.5})`);
-        gradient.addColorStop(1, 'transparent');
-        
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.radius * 3, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-        
-        // Core dot
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-        ctx.fillStyle = currentDark 
-          ? `rgba(255, 255, 255, ${dot.opacity * 1.2})` 
-          : `rgba(0, 0, 0, ${dot.opacity * 1.2})`;
-        ctx.fill();
+      // Clear with subtle background
+      ctx.fillStyle = isDark ? 'rgba(15, 15, 15, 0.1)' : 'rgba(255, 255, 255, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw and update grid lines
+      gridLines.forEach(line => {
+        line.update();
+        line.draw(ctx, isDark);
       });
 
+      // Draw and update orbs
+      orbs.forEach(orb => {
+        orb.update();
+        orb.draw(ctx, isDark);
+      });
+
+      time += 0.01;
       animationFrameId = requestAnimationFrame(animate);
     };
 
@@ -106,7 +154,7 @@ const AnimatedBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0, opacity: 0.5 }}
+      style={{ zIndex: 0 }}
     />
   );
 };
