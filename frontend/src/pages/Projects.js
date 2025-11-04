@@ -4,64 +4,85 @@ import { ExternalLink, Github, Star } from 'lucide-react';
 const Projects = () => {
   const projects = [
     {
-      name: 'TCPlibrary',
-      description: 'Library containing functions and structures to facilitate creation of TCP client and server in C. Complete implementation of socket programming with examples and documentation.',
-      tags: ['C', 'TCP/IP', 'Networking', 'Socket Programming'],
+      name: 'Portfolio (TypeScript)',
+      description: 'Modern portfolio website built with TypeScript. Features responsive design, smooth animations, and optimized performance. Showcases professional work and technical expertise.',
+      tags: ['TypeScript', 'React', 'Web Design', 'Frontend'],
       year: '2024',
-      link: 'https://github.com/twillsonepitech/TCPlibrary',
-      github: 'https://github.com/twillsonepitech/TCPlibrary',
+      link: 'https://github.com/twillsonepitech/portfolio',
+      github: 'https://github.com/twillsonepitech/portfolio',
       status: 'Active',
-      language: 'C'
+      language: 'TypeScript'
+    },
+    {
+      name: 'Library Management System',
+      description: 'Complete web application for library management. Handles book cataloging, user management, lending system, and search functionality with an intuitive interface.',
+      tags: ['PHP', 'MySQL', 'Web App', 'CRUD'],
+      year: '2024',
+      link: 'https://github.com/twillsonepitech/library',
+      github: 'https://github.com/twillsonepitech/library',
+      status: 'Complete',
+      language: 'PHP'
+    },
+    {
+      name: 'Gomoku AI Game',
+      description: 'Graphical Gomoku game with artificial intelligence. Implements minimax algorithm with alpha-beta pruning for intelligent gameplay. Built with C++ and graphical interface.',
+      tags: ['C++', 'AI', 'Game Development', 'Algorithm'],
+      year: '2023',
+      link: 'https://github.com/twillsonepitech/Gomoku',
+      github: 'https://github.com/twillsonepitech/Gomoku',
+      status: 'Complete',
+      language: 'C++'
+    },
+    {
+      name: 'Antman - Huffman Compression',
+      description: 'File compression and decompression tool using Huffman algorithm. Efficient lossless data compression with optimal encoding implementation.',
+      tags: ['C', 'Algorithm', 'Compression', 'Data Structures'],
+      year: '2022',
+      link: 'https://github.com/twillsonepitech/Antman',
+      github: 'https://github.com/twillsonepitech/Antman',
+      status: 'Complete',
+      language: 'C',
+      license: 'MIT'
+    },
+    {
+      name: 'Wedding App (Flutter)',
+      description: 'Mobile application built with Flutter/Dart for wedding planning and management. Features event scheduling, guest management, and photo sharing.',
+      tags: ['Dart', 'Flutter', 'Mobile', 'Cross-platform'],
+      year: '2023',
+      link: 'https://github.com/twillsonepitech/wedding',
+      github: 'https://github.com/twillsonepitech/wedding',
+      status: 'Complete',
+      language: 'Dart'
+    },
+    {
+      name: 'Matchstick Game (Rust)',
+      description: 'Implementation of the Matchstick game in Rust. Features game logic, AI opponent, and command-line interface with robust error handling.',
+      tags: ['Rust', 'Game Logic', 'CLI', 'Systems Programming'],
+      year: '2023',
+      link: 'https://github.com/twillsonepitech/Matchstick',
+      github: 'https://github.com/twillsonepitech/Matchstick',
+      status: 'Complete',
+      language: 'Rust'
     },
     {
       name: 'FTP Server (C)',
-      description: 'FTP server implementation following the RFC959 protocol. Supports multiple clients, file transfers, directory navigation, and standard FTP commands.',
-      tags: ['C', 'FTP', 'RFC959', 'Server', 'Protocol'],
-      year: '2024',
+      description: 'FTP server implementation following RFC959 protocol. Supports multiple clients, file transfers, directory navigation, and standard FTP commands.',
+      tags: ['C', 'FTP', 'RFC959', 'Networking'],
+      year: '2023',
       link: 'https://github.com/twillsonepitech/C-modul-FTP',
       github: 'https://github.com/twillsonepitech/C-modul-FTP',
       status: 'Complete',
       language: 'C'
     },
     {
-      name: 'Get-Next-Line',
-      description: 'Function that returns a read line from a file descriptor. Optimized memory management and buffer handling for efficient file reading operations.',
-      tags: ['C', 'File I/O', 'Memory Management', 'Algorithm'],
-      year: '2023',
-      link: 'https://github.com/twillsonepitech/Get-Next-Line',
-      github: 'https://github.com/twillsonepitech/Get-Next-Line',
+      name: 'OOP Java Project',
+      description: 'Object-oriented programming project demonstrating advanced Java concepts. Implements design patterns, inheritance, polymorphism, and best practices.',
+      tags: ['Java', 'OOP', 'Design Patterns', 'Enterprise'],
+      year: '2024',
+      link: 'https://github.com/twillsonepitech/oop-java-project',
+      github: 'https://github.com/twillsonepitech/oop-java-project',
       status: 'Complete',
-      language: 'C'
-    },
-    {
-      name: 'Biggest-Square',
-      description: 'Algorithm to find the biggest square in a file map. Implements efficient matrix parsing and dynamic programming for optimal square detection.',
-      tags: ['Shell', 'Algorithm', 'Problem Solving', 'Optimization'],
-      year: '2023',
-      link: 'https://github.com/twillsonepitech/Biggest-Square',
-      github: 'https://github.com/twillsonepitech/Biggest-Square',
-      status: 'Complete',
-      language: 'Shell'
-    },
-    {
-      name: 'Free-Dimension',
-      description: 'Memory management library to free all types of pointer dimensions without loops or memory leaks. Recursive implementation for multi-dimensional arrays.',
-      tags: ['C', 'Memory Management', 'Pointers', 'Recursion'],
-      year: '2023',
-      link: 'https://github.com/twillsonepitech/Free-Dimension',
-      github: 'https://github.com/twillsonepitech/Free-Dimension',
-      status: 'Complete',
-      language: 'C'
-    },
-    {
-      name: 'Lib-IO',
-      description: 'Input/Output library containing wrappers and utility functions. Simplifies file operations, standard I/O, and error handling in C projects.',
-      tags: ['C', 'Library', 'I/O Operations', 'Utilities'],
-      year: '2023',
-      link: 'https://github.com/twillsonepitech/Lib-IO',
-      github: 'https://github.com/twillsonepitech/Lib-IO',
-      status: 'Active',
-      language: 'C'
+      language: 'Java'
     }
   ];
 
