@@ -1,67 +1,67 @@
 import React from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Star } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
     {
-      name: 'Partech Portfolio Tracker',
-      description: 'Internal tool for Partech Partners to track investment portfolio performance with real-time analytics, reporting, and data visualization. Built to handle complex financial data with high performance requirements.',
-      tags: ['Next.js', 'PostgreSQL', 'React', 'TailwindCSS', 'Charts.js'],
+      name: 'TCPlibrary',
+      description: 'Library containing functions and structures to facilitate creation of TCP client and server in C. Complete implementation of socket programming with examples and documentation.',
+      tags: ['C', 'TCP/IP', 'Networking', 'Socket Programming'],
       year: '2024',
-      link: '#',
-      github: '#',
-      status: 'Production',
-      client: 'Partech Partners'
+      link: 'https://github.com/twillsonepitech/TCPlibrary',
+      github: 'https://github.com/twillsonepitech/TCPlibrary',
+      status: 'Active',
+      language: 'C'
     },
     {
-      name: 'Mobilier Solidaire E-commerce',
-      description: 'Complete e-commerce platform with integrated CRM for furniture retail. Features include inventory management, order processing, customer tracking, and social impact reporting for sustainable furniture business.',
-      tags: ['React', 'NestJS', 'Stripe', 'PostgreSQL', 'Docker'],
-      year: '2023',
-      link: '#',
-      github: '#',
-      status: 'Production',
-      client: 'Groupe Mobilier Solidaire'
-    },
-    {
-      name: '6ixtes Custom Configurator',
-      description: 'Client-facing product configurator with real-time 3D preview and multi-table back-office system for custom furniture design. Allows customers to personalize furniture and see live previews.',
-      tags: ['Next.js', 'Node.js', 'MongoDB', 'Vercel', 'Three.js'],
-      year: '2023',
-      link: '#',
-      github: '#',
-      status: 'Production',
-      client: '6ixtes'
-    },
-    {
-      name: 'Link-Up Learning Platform',
-      description: 'Student management application with course tracking, progress monitoring, and analytics dashboard. Features real-time updates, assignment management, and comprehensive reporting for educators.',
-      tags: ['Angular', 'Firebase', 'TypeScript', 'Material UI', 'RxJS'],
-      year: '2022',
-      link: '#',
-      github: '#',
-      status: 'Production',
-      client: 'Link-Up'
-    },
-    {
-      name: 'Personal Portfolio & Blog',
-      description: 'Modern portfolio website built with React and TailwindCSS. Features dark mode, smooth animations, and responsive design. Showcases projects, experiences, and technical writing.',
-      tags: ['React', 'TailwindCSS', 'Vite', 'Vercel'],
+      name: 'FTP Server (C)',
+      description: 'FTP server implementation following the RFC959 protocol. Supports multiple clients, file transfers, directory navigation, and standard FTP commands.',
+      tags: ['C', 'FTP', 'RFC959', 'Server', 'Protocol'],
       year: '2024',
-      link: '#',
-      github: '#',
-      status: 'Active',
-      client: 'Personal'
+      link: 'https://github.com/twillsonepitech/C-modul-FTP',
+      github: 'https://github.com/twillsonepitech/C-modul-FTP',
+      status: 'Complete',
+      language: 'C'
     },
     {
-      name: 'API Gateway & Microservices',
-      description: 'Scalable API gateway built with NestJS to handle multiple microservices. Implements authentication, rate limiting, caching, and real-time data synchronization across services.',
-      tags: ['NestJS', 'Redis', 'PostgreSQL', 'Docker', 'Kubernetes'],
+      name: 'Get-Next-Line',
+      description: 'Function that returns a read line from a file descriptor. Optimized memory management and buffer handling for efficient file reading operations.',
+      tags: ['C', 'File I/O', 'Memory Management', 'Algorithm'],
       year: '2023',
-      link: '#',
-      github: '#',
+      link: 'https://github.com/twillsonepitech/Get-Next-Line',
+      github: 'https://github.com/twillsonepitech/Get-Next-Line',
+      status: 'Complete',
+      language: 'C'
+    },
+    {
+      name: 'Biggest-Square',
+      description: 'Algorithm to find the biggest square in a file map. Implements efficient matrix parsing and dynamic programming for optimal square detection.',
+      tags: ['Shell', 'Algorithm', 'Problem Solving', 'Optimization'],
+      year: '2023',
+      link: 'https://github.com/twillsonepitech/Biggest-Square',
+      github: 'https://github.com/twillsonepitech/Biggest-Square',
+      status: 'Complete',
+      language: 'Shell'
+    },
+    {
+      name: 'Free-Dimension',
+      description: 'Memory management library to free all types of pointer dimensions without loops or memory leaks. Recursive implementation for multi-dimensional arrays.',
+      tags: ['C', 'Memory Management', 'Pointers', 'Recursion'],
+      year: '2023',
+      link: 'https://github.com/twillsonepitech/Free-Dimension',
+      github: 'https://github.com/twillsonepitech/Free-Dimension',
+      status: 'Complete',
+      language: 'C'
+    },
+    {
+      name: 'Lib-IO',
+      description: 'Input/Output library containing wrappers and utility functions. Simplifies file operations, standard I/O, and error handling in C projects.',
+      tags: ['C', 'Library', 'I/O Operations', 'Utilities'],
+      year: '2023',
+      link: 'https://github.com/twillsonepitech/Lib-IO',
+      github: 'https://github.com/twillsonepitech/Lib-IO',
       status: 'Active',
-      client: 'Open Source'
+      language: 'C'
     }
   ];
 
