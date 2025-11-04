@@ -90,7 +90,7 @@ const Projects = () => {
                 <div className="flex items-center gap-3 mt-1 text-sm text-gray-500 dark:text-gray-400">
                   <span>{project.year}</span>
                   <span>•</span>
-                  <span className="font-medium">{project.client}</span>
+                  <span className="font-medium">{project.language}</span>
                   <span>•</span>
                   <span className="px-2 py-0.5 rounded text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
                     {project.status}
@@ -98,15 +98,6 @@ const Projects = () => {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
-                  aria-label="View project"
-                >
-                  <ExternalLink size={18} />
-                </a>
                 <a
                   href={project.github}
                   target="_blank"
