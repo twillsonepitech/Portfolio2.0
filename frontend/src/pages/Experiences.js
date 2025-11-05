@@ -172,14 +172,18 @@ const Experiences = () => {
                 {exp.title}
               </h2>
               <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-600 dark:text-gray-400">
-                <span className="font-medium">{exp.company}</span>
+                <span className="font-medium text-base">{exp.company}</span>
+                <span>•</span>
+                <span className="italic">{exp.type}</span>
+                <span>•</span>
                 <span className="flex items-center gap-1">
                   <MapPin size={14} />
                   {exp.location}
                 </span>
+                <span>•</span>
                 <span className="flex items-center gap-1">
                   <Calendar size={14} />
-                  {exp.period}
+                  {exp.period} ({exp.duration})
                 </span>
               </div>
             </div>
