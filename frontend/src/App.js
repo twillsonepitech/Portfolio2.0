@@ -5,8 +5,8 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Experiences from './pages/Experiences';
 import Projects from './pages/Projects';
-import Talks from './pages/Talks';
-import Sponsors from './pages/Sponsors';
+import Hackathons from './pages/Hackathons';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/experiences" element={<Experiences />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/talks" element={<Talks />} />
-            <Route path="/sponsors" element={<Sponsors />} />
+            <Route path="/hackathons" element={<Hackathons />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </Layout>
       </BrowserRouter>
