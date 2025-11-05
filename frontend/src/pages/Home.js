@@ -115,8 +115,8 @@ const Home = () => {
 
         <p>
           I give{' '}
-          <a href="/talks" className="text-gray-900 dark:text-gray-100 hover:underline">
-            talks
+          <a href="/hackathons" className="text-gray-900 dark:text-gray-100 hover:underline">
+            hackathon presentations
           </a>{' '}
           and share{' '}
           <a href="/experiences" className="text-gray-900 dark:text-gray-100 hover:underline">
@@ -131,6 +131,14 @@ const Home = () => {
 
         <p>
           Je conçois des produits web complets, performants et maintenables. Mon approche : du code clair, des outils modernes, et une forte autonomie dans la livraison — que ce soit pour un MVP ou un produit déjà en production.
+        </p>
+
+        <p>
+          Feel free to{' '}
+          <a href="/contact" className="text-gray-900 dark:text-gray-100 hover:underline">
+            get in touch
+          </a>{' '}
+          if you'd like to collaborate or discuss a project!
         </p>
       </section>
 
@@ -149,47 +157,7 @@ const Home = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-              >
-                <Icon size={16} />
-                <span className="text-sm">{social.name}</span>
-              </a>
-            );
-          })}
-        </div>
-
-        <p className="mt-4 text-gray-600 dark:text-gray-400 text-sm">
-          Or mail me at{' '}
-          <a href="mailto:hi@thomaswillson.dev" className="text-gray-900 dark:text-gray-100 hover:underline">
-            hi@thomaswillson.dev
-          </a>
-        </p>
-      </section>
-
-      <div className="border-t border-gray-200 dark:border-gray-800 my-10"></div>
-
-      {/* Sponsorship Section */}
-      <section className="space-y-4">
-        <p className="text-gray-700 dark:text-gray-300">
-          If you enjoy my work and find them useful, consider sponsoring me to help keep my open source projects sustainable. Thank you!
-        </p>
-
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm"
-          >
-            <span>💝</span>
-            <span>Sponsor me on GitHub</span>
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm"
-          >
-            <span>☕</span>
-            <span>Buy me a coffee</span>
-          </a>
-        </div>
-      </section>
+              >\n                <Icon size={16} />\n                <span className=\"text-sm\">{social.name}</span>\n              </a>\n            );\n          })}\n        </div>\n\n        <p className=\"mt-4 text-gray-600 dark:text-gray-400 text-sm\">\n          Or mail me at{' '}\n          <a href=\"mailto:hi@thomaswillson.dev\" className=\"text-gray-900 dark:text-gray-100 hover:underline\">\n            hi@thomaswillson.dev\n          </a>\n        </p>\n      </section>
 
       {/* Footer */}
       <footer className="pt-10 pb-6 text-center text-sm text-gray-500 dark:text-gray-500">
