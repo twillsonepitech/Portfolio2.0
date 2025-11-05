@@ -11,8 +11,8 @@ const Layout = ({ children }) => {
   const navLinks = [
     { name: 'Experiences', path: '/experiences' },
     { name: 'Projects', path: '/projects' },
-    { name: 'Talks', path: '/talks' },
-    { name: 'Sponsors', path: '/sponsors' }
+    { name: 'Hackathons', path: '/hackathons' },
+    { name: 'Contact', path: '/contact' }
   ];
 
   const isActive = (path) => location.pathname === path;
