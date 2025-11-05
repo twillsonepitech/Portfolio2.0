@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Mic, Camera, Rss, Github, Sun, Moon } from 'lucide-react';
+import { Camera, Github, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import AnimatedBackground from './AnimatedBackground';
 
