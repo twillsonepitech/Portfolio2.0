@@ -157,7 +157,21 @@ const Home = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-              >\n                <Icon size={16} />\n                <span className=\"text-sm\">{social.name}</span>\n              </a>\n            );\n          })}\n        </div>\n\n        <p className=\"mt-4 text-gray-600 dark:text-gray-400 text-sm\">\n          Or mail me at{' '}\n          <a href=\"mailto:hi@thomaswillson.dev\" className=\"text-gray-900 dark:text-gray-100 hover:underline\">\n            hi@thomaswillson.dev\n          </a>\n        </p>\n      </section>
+              >
+                <Icon size={16} />
+                <span className="text-sm">{social.name}</span>
+              </a>
+            );
+          })}
+        </div>
+
+        <p className="mt-4 text-gray-600 dark:text-gray-400 text-sm">
+          Or mail me at{' '}
+          <a href="mailto:hi@thomaswillson.dev" className="text-gray-900 dark:text-gray-100 hover:underline">
+            hi@thomaswillson.dev
+          </a>
+        </p>
+      </section>
 
       {/* Footer */}
       <footer className="pt-10 pb-6 text-center text-sm text-gray-500 dark:text-gray-500">
