@@ -4,74 +4,149 @@ import { Calendar, MapPin } from 'lucide-react';
 const Experiences = () => {
   const experiences = [
     {
-      title: 'Freelance Full-Stack Developer',
-      company: 'Self-Employed',
-      location: 'Paris, France',
-      period: '2022 - Present',
-      description: 'Conception et développement de plateformes sur mesure : sites vitrines, e-commerce, CRM, dashboards analytiques.',
+      title: 'Développeur Full Stack',
+      company: 'Groupe Mobilier Solidaire',
+      type: 'Freelance',
+      location: 'Drancy, Île-de-France',
+      period: 'avril 2025 - Présent',
+      duration: '8 mois',
+      description: 'Groupe Mobilier Solidaire est une société qui s\'occupe de vendre du mobilier pour ses clients.',
       achievements: [
-        'Led development of internal tools for Partech Partners',
-        'Built complete e-commerce platform for Groupe Mobilier Solidaire',
-        'Created custom configurator system for 6ixtes',
-        'Developed learning management platform for Link-Up'
+        'Site vitrine / e-commerce complet pour présenter produits, collections, catalogue et gestion des commandes',
+        'CRM complet : gestion des commandes (changement de statuts), création des produits et collections',
+        'Système de notifications et gestion des médias (connecté avec Cloudinary) pour chaque client',
+        'Backend NestJS avec architecture robuste et performante'
       ],
-      technologies: ['React', 'Next.js', 'NestJS', 'PostgreSQL', 'TypeScript', 'Supabase']
+      technologies: ['Next.js', 'NestJS', 'PostgreSQL', 'Prisma', 'TypeScript', 'Docker', 'Cloudinary', 'E-commerce', 'CRM']
     },
     {
-      title: 'Full-Stack Developer - Partech Partners',
-      company: 'Partech Partners',
-      location: 'Paris, France',
-      period: '2023 - 2024',
-      description: 'Refonte d\'outils internes et intégration de systèmes de suivi de portefeuille pour le fonds d\'investissement.',
+      title: 'Développeur Full Stack',
+      company: 'Link Up',
+      type: 'Freelance',
+      location: 'Paris, Île-de-France',
+      period: 'juillet 2025 - juillet 2025',
+      duration: '1 mois',
+      description: 'Link-up s\'occupe de la relation entre apprenants et tuteurs pour gérer le suivi pédagogique. Travaille avec plusieurs centres de formation comme CRAF2S.',
       achievements: [
-        'Modernized internal infrastructure and tooling',
-        'Implemented real-time portfolio tracking analytics',
-        'Improved data visualization and reporting systems',
-        'Reduced load times by 60% through optimization'
+        'Développement d\'une fonctionnalité d\'évaluation individuelle des apprenants pour les coordonnateurs',
+        'Implémentation côté panel administratif pour création des évaluations par les centres de formation',
+        'Développement côté application client pour évaluation des apprenants avec système de questions',
+        'Intégration complète entre backend et frontend pour workflow d\'évaluation'
       ],
-      technologies: ['Next.js', 'PostgreSQL', 'React', 'TailwindCSS', 'Node.js']
+      technologies: ['React', 'Node.js', 'PostgreSQL', 'TypeScript', 'API REST']
     },
     {
-      title: 'Web Developer - Groupe Mobilier Solidaire',
-      company: 'Mobilier Solidaire',
-      location: 'Paris, France',
-      period: '2023',
-      description: 'Développement d\'un site e-commerce complet avec CRM intégré pour la vente de mobilier.',
-      achievements: [
-        'Built complete e-commerce platform from scratch',
-        'Integrated Stripe payment processing',
-        'Developed custom CRM for customer management',
-        'Implemented inventory management system'
-      ],
-      technologies: ['React', 'NestJS', 'Stripe', 'PostgreSQL', 'Docker']
-    },
-    {
-      title: 'Frontend Developer - 6ixtes',
+      title: 'Développeur Front-end',
       company: '6ixtes',
-      location: 'Paris, France',
-      period: '2023',
-      description: 'Création d\'un configurateur client et back-office multi-tables pour la personnalisation de meubles.',
+      type: 'Freelance - Temps Partiel',
+      location: 'Paris, Île-de-France',
+      period: 'février 2025 - juillet 2025',
+      duration: '6 mois',
+      description: 'Refonte complète du site pour les clients et l\'équipe interne.',
       achievements: [
-        'Designed and built interactive product configurator',
-        'Created multi-table back-office management system',
-        'Implemented real-time preview functionality',
-        'Optimized performance for complex configurations'
+        'Création du configurateur permettant aux clients de composer et passer commande',
+        'Accès administratif à la BDD avec plus de 10 tables, chacune avec leurs CRUDs',
+        'Système de prévisualisation en temps réel des configurations',
+        'Interface de création et modification avec nombreuses fonctionnalités avancées'
       ],
-      technologies: ['Next.js', 'Node.js', 'MongoDB', 'Vercel']
+      technologies: ['TypeScript', 'React', 'Next.js', 'styled-components', 'zustand', 'MongoDB']
     },
     {
-      title: 'Full-Stack Developer - Link-Up',
-      company: 'Link-Up',
-      location: 'Paris, France',
-      period: '2022',
-      description: 'Mise en place d\'une application de gestion d\'apprenants avec suivi de progression.',
+      title: 'Développeur Full Stack',
+      company: 'Partech',
+      type: 'Freelance',
+      location: 'Paris, Île-de-France',
+      period: 'juin 2024 - mars 2025',
+      duration: '10 mois',
+      description: 'Création du panel administratif pour la gestion de leur EDM et CRM complet.',
       achievements: [
-        'Built student management platform',
-        'Implemented course tracking and analytics',
-        'Created progress monitoring dashboard',
-        'Integrated Firebase authentication'
+        'Développement du CRM complet pour gestion de l\'EDM (juin-sept 2024)',
+        'Création du panel administratif pour manipulation et création de documents (sept 2024-mars 2025)',
+        'Gestion des specs internes depuis l\'interface administrative',
+        'Ajout de nouvelles features sur EDM avec design Figma associé'
       ],
-      technologies: ['Angular', 'Firebase', 'TypeScript', 'Material UI']
+      technologies: ['TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Docker', 'Playwright', 'k6.io']
+    },
+    {
+      title: 'Développeur Full Stack',
+      company: '6ixtes',
+      type: 'Freelance',
+      location: 'Paris, Île-de-France',
+      period: 'juin 2024 - octobre 2024',
+      duration: '5 mois',
+      description: 'Amélioration et maintenance du CRM et du site web.',
+      achievements: [
+        'Ajout de nouvelles fonctionnalités au CRM existant',
+        'Développement de nouvelles features pour améliorer l\'expérience utilisateur',
+        'Maintenance et optimisation du site web',
+        'Correction de bugs et amélioration des performances'
+      ],
+      technologies: ['React', 'Node.js', 'MongoDB', 'TypeScript', 'Docker']
+    },
+    {
+      title: 'Développeur Full Stack',
+      company: 'Ollamy',
+      type: 'Projet de groupe (8 personnes) - Epitech',
+      location: 'Paris, Île-de-France',
+      period: 'juillet 2023 - janvier 2025',
+      duration: '1 an 7 mois',
+      description: 'Projet d\'école Epitech en équipe de 8 personnes.',
+      achievements: [
+        'Collaboration en équipe de 8 développeurs sur projet complexe',
+        'Architecture full-stack complète',
+        'Gestion de projet et méthodologies agiles',
+        'Développement backend et frontend'
+      ],
+      technologies: ['NestJS', 'React', 'PostgreSQL', 'Prisma', 'Docker', 'TypeScript']
+    },
+    {
+      title: 'Développeur Full Stack',
+      company: 'Jungle Bike',
+      type: 'Freelance',
+      location: 'Paris, Île-de-France',
+      period: 'août 2023 - octobre 2023',
+      duration: '3 mois',
+      description: 'Intégration d\'APIs e-commerce multiples dans architecture WordPress.',
+      achievements: [
+        'Intégration API Shopify pour synchronisation catalogue produits',
+        'Intégration API WooCommerce pour gestion e-commerce',
+        'Intégration API PrestaShop pour multi-plateforme',
+        'Système de stockage en base de données pour articles clients',
+        'Ajout de Cron Jobs via WordPress pour automatisation'
+      ],
+      technologies: ['PHP', 'WordPress', 'Shopify API', 'WooCommerce', 'PrestaShop', 'MySQL', 'API']
+    },
+    {
+      title: 'Développeur bas niveau',
+      company: 'Innovative Findings',
+      type: 'CDD',
+      location: 'Paris, Île-de-France',
+      period: 'juillet 2022 - juillet 2023',
+      duration: '1 an 1 mois',
+      description: 'Développement bas niveau et programmation système.',
+      achievements: [
+        'Développement en langage bas niveau',
+        'Optimisation des performances système',
+        'Travail sur architectures complexes',
+        'Debugging et résolution de problèmes critiques'
+      ],
+      technologies: ['C', 'C++', 'Système', 'Linux', 'Bas niveau']
+    },
+    {
+      title: 'Développeur Full Stack',
+      company: 'Smice',
+      type: 'Stage',
+      location: 'Paris, Île-de-France',
+      period: 'juillet 2021 - décembre 2021',
+      duration: '6 mois',
+      description: 'Premier stage de développement full-stack.',
+      achievements: [
+        'Découverte du développement web professionnel',
+        'Participation au développement frontend et backend',
+        'Apprentissage des bonnes pratiques de développement',
+        'Collaboration en équipe sur projets réels'
+      ],
+      technologies: ['React', 'Node.js', 'JavaScript', 'Web Development']
     }
   ];
 
