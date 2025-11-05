@@ -51,28 +51,16 @@ const Layout = ({ children }) => {
 
             <div className="flex items-center gap-3">
               <a
-                href="#"
-                className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
-                aria-label="Podcast"
-              >
-                <Mic size={18} />
-              </a>
-              <a
-                href="#"
+                href="/photos"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
                 aria-label="Photos"
               >
                 <Camera size={18} />
               </a>
               <a
-                href="#"
-                className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
-                aria-label="RSS"
-              >
-                <Rss size={18} />
-              </a>
-              <a
-                href="#"
+                href="https://github.com/twillsonepitech"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
                 aria-label="GitHub"
               >
