@@ -7,6 +7,7 @@ import Experiences from './pages/Experiences';
 import Projects from './pages/Projects';
 import Hackathons from './pages/Hackathons';
 import Contact from './pages/Contact';
+import Photos from './pages/Photos';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/hackathons" element={<Hackathons />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/photos" element={<Photos />} />
           </Routes>
         </Layout>
       </BrowserRouter>
