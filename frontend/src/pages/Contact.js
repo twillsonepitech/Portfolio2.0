@@ -1,6 +1,6 @@
-import Footer from '../components/Footer';
 import React, { useState } from 'react';
 import { Mail, Linkedin, Github, Send, CheckCircle } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
