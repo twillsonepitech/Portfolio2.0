@@ -114,17 +114,17 @@ const Home = () => {
         </p>
 
         <p>
-          I give{' '}
+          Je participe à des{' '}
           <a href="/hackathons" className="text-gray-900 dark:text-gray-100 hover:underline">
-            hackathon presentations
+            hackathons
           </a>{' '}
-          and share{' '}
+          et partage mes{' '}
           <a href="/experiences" className="text-gray-900 dark:text-gray-100 hover:underline">
-            professional experiences
+            expériences professionnelles
           </a>{' '}
-          about web development, modern JavaScript, and building scalable applications. You can find my{' '}
+          sur le développement web, JavaScript moderne et la construction d'applications scalables. Vous pouvez consulter ma{' '}
           <a href="/projects" className="text-gray-900 dark:text-gray-100 hover:underline">
-            full projects list here
+            liste complète de projets ici
           </a>
           .
         </p>
@@ -134,11 +134,11 @@ const Home = () => {
         </p>
 
         <p>
-          Feel free to{' '}
+          N'hésitez pas à me{' '}
           <a href="/contact" className="text-gray-900 dark:text-gray-100 hover:underline">
-            get in touch
+            contacter
           </a>{' '}
-          if you'd like to collaborate or discuss a project!
+          si vous souhaitez collaborer ou discuter d'un projet !
         </p>
       </section>
 
@@ -146,7 +146,7 @@ const Home = () => {
 
       {/* Social Links */}
       <section>
-        <h3 className="text-sm text-gray-500 dark:text-gray-400 mb-4">Find me on</h3>
+        <h3 className="text-sm text-gray-500 dark:text-gray-400 mb-4">Me retrouver sur</h3>
         <div className="flex flex-wrap gap-4">
           {socialLinks.map((social, index) => {
             const Icon = social.icon;
