@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, MapPin } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const Experiences = () => {
   const experiences = [
