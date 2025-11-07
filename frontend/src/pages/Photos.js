@@ -1,3 +1,4 @@
+import Footer from '../components/Footer';
 import React, { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 

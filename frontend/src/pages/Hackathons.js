@@ -1,3 +1,4 @@
+import Footer from '../components/Footer';
 import React from 'react';
 import { Trophy, Calendar, MapPin, Award } from 'lucide-react';
 
