@@ -148,19 +148,7 @@ const Projects = () => {
         ))}
       </div>
 
-      <footer className="pt-10 pb-6 text-center text-sm text-gray-500 dark:text-gray-500">
-        <p>
-          <a
-            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-gray-700 dark:hover:text-gray-400"
-          >
-            CC BY-NC-SA 4.0
-          </a>{' '}
-          2021-PRESENT © Thomas Willson
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 };
