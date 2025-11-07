@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExternalLink, Github, Star } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const Projects = () => {
   const projects = [
